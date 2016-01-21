@@ -1,6 +1,6 @@
 {
   "name": "botzo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Gets angry about almost anything. Tbh, everything.",
   "main": "botzo.js",
   "dependencies": {
