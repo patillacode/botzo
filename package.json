@@ -1,17 +1,19 @@
 {
-    "name": "botzo",
-    "version": "0.0.2",
-    "description": "Gets angry about almost anything. Tbh, everything.",
-    "main": "botzo.js",
-    "dependencies": {"botkit": ">=0.0.5"},
-    "devDependencies": {},
-    "scripts": {
-        "test": "echo \"No tests yet\" && exit 1"
-    },
-    "author": "patillacode@gmail.com",
-    "license": "GPL-3.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/patillacode/botzo.git"
-    }
+  "name": "botzo",
+  "version": "0.0.2",
+  "description": "Gets angry about almost anything. Tbh, everything.",
+  "main": "botzo.js",
+  "dependencies": {
+    "botkit": "0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 1"
+  },
+  "author": "patillacode@gmail.com",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patillacode/botzo.git"
+  }
 }

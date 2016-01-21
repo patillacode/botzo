@@ -9,7 +9,7 @@ Gets angry about almost anything. Tbh, everything.
 * Follow [Botkit's installation](https://github.com/howdyai/botkit#installation) guide (do it within botzo folder)
 
 ### Run
-* I run the bot from a bash script, that I saved within the `node_modules` folder, very simple:
+* I run the bot from a bash script, that I saved within the `node_modules/botkit/` folder, very simple:
 
 ```bash
 
