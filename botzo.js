@@ -24,14 +24,14 @@ var bot = controller.spawn({
     token: process.env.token
 }).startRTM();
 
-controller.hears(['help'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['help'], 'direct_message, direct_mention,mention', function(bot, message) {
     bot.reply(message, 'Available commands:');
     bot.reply(message, '`random` -  Get a random angry message from Botzo');
     bot.reply(message, '`weather` -  Get London\'s current weather');
     bot.reply(message, '```Basically you will get told to fuck off, no matter what you say```');
 });
 
-controller.hears(['weather'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['weather'], 'direct_message, direct_mention, mention', function(bot, message) {
     bot.startConversation(message, function(err, convo) {
         convo.ask('For what city you loser?', function(response, convo) {
             w = functions.get_weather(bot, message, response.text);
@@ -40,11 +40,11 @@ controller.hears(['weather'], 'direct_message,direct_mention,mention', function(
     });
 });
 
-controller.hears(['tits', 'boobs'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['tits', 'boobs'], 'direct_message, direct_mention,mention', function(bot, message) {
     bot.reply(message, '（。 ㅅ  。）');
 });
 
-controller.hears(['(.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['(.*)'], 'direct_message, direct_mention,mention', function(bot, message) {
     var bot_response = functions.random_message();
     var bot_message = bot_response.message;
     var bot_icon = bot_response.icon;
