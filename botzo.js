@@ -25,42 +25,42 @@ var bot = controller.spawn({
 }).startRTM();
 
 controller.hears(['help'], 'direct_message,direct_mention,mention', function(bot, message) {
-        bot.reply(message, 'Available commands:');
-        bot.reply(message, '`random` -  Get a random angry message from Botzo');
-        bot.reply(message, '`weather` -  Get London\'s current weather');
-        bot.reply(message, '```Basically you will get told to fuck off, no matter what you say```');
+    bot.reply(message, 'Available commands:');
+    bot.reply(message, '`random` -  Get a random angry message from Botzo');
+    bot.reply(message, '`weather` -  Get London\'s current weather');
+    bot.reply(message, '```Basically you will get told to fuck off, no matter what you say```');
 });
 
 controller.hears(['weather'], 'direct_message,direct_mention,mention', function(bot, message) {
-        bot.startConversation(message,function(err,convo) {
-            convo.ask('For what city you loser?',function(response,convo) {
-                w = functions.get_weather(bot, message, response.text);
-                convo.next();
-            });
+    bot.startConversation(message, function(err, convo) {
+        convo.ask('For what city you loser?', function(response, convo) {
+            w = functions.get_weather(bot, message, response.text);
+            convo.next();
         });
+    });
 });
 
 controller.hears(['tits', 'boobs'], 'direct_message,direct_mention,mention', function(bot, message) {
-        bot.reply(message, '（。 ㅅ  。）');
+    bot.reply(message, '（。 ㅅ  。）');
 });
 
-controller.hears(['(.*)'],'direct_message,direct_mention,mention',function(bot, message) {
+controller.hears(['(.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
     bot_response = functions.random_message();
-    bot_message = bot_response['message'];
-    bot_icon = bot_response['icon'];
+    bot_message = bot_response.message;
+    bot_icon = bot_response.icon;
 
     bot.api.reactions.add({
         timestamp: message.ts,
         channel: message.channel,
         name: bot_icon,
-    },function(err, res) {
+    }, function(err, res) {
         if (err) {
-            bot.botkit.log('Failed to add emoji reaction :(',err);
+            bot.botkit.log('Failed to add emoji reaction :(', err);
             bot.botkit.log(bot_icon);
         }
     });
 
-    controller.storage.users.get(message.user,function(err, user) {
+    controller.storage.users.get(message.user, function(err, user) {
         bot.reply(message, bot_message);
     });
 });
