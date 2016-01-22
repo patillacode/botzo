@@ -2,7 +2,7 @@ var angryMessages = require('./angryMessages.json');
 var weather = require('weather-js');
 
 function random_message() {
-    random_pos = Math.floor(Math.random() * angry_messages.length);
+    var random_pos = Math.floor(Math.random() * angry_messages.length);
     return {
         'message': angry_messages[random_pos]['message'],
         'icon': angry_messages[random_pos]['icon']
@@ -28,21 +28,15 @@ function get_weather(bot, message, location) {
         if (err) {
             print_weather_error(err, bot, message, location);
         } else {
-            current = result[0]['current'];
-            temperature = current['temperature'];
-            skytext = current['skytext'];
-            feelslike = current['feelslike'];
-            humidity = current['humidity'];
-
-            weather_data = {
-                'temperature': temperature,
-                'skytext': skytext,
-                'feelslike': feelslike,
-                'humidity': humidity
+            var weather_data = {
+                'temperature': current['temperature'],
+                'skytext': current['skytext'],
+                'feelslike': current['feelslike'],
+                'humidity': current['humidity']
             };
-            weather_messages = [];
+            var weather_messages = [];
             weather_messages.push('It is fucking ' + weather_data['temperature'] + ' degrees, aight?');
-            if (weather_data['temperature'] != weather_data['feelslike']) {
+            if (weather_data['temperature'] !== weather_data['feelslike']) {
                 weather_messages.push('But it feels like ' + weather_data['feelslike'] + 'º god dammit!');
             }
             weather_messages.push(weather_data['skytext'] + ' / ' + weather_data['humidity'] + '% humidity');
