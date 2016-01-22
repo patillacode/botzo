@@ -28,7 +28,7 @@ controller.hears(['help'], 'direct_message,direct_mention,mention', function(bot
         bot.reply(message, 'Available commands:');
         bot.reply(message, '`random` -  Get a random angry message from Botzo');
         bot.reply(message, '`weather` -  Get London\'s current weather');
-        bot.reply(message, '```Basically you will get told to fvck off, no matter what you say```');
+        bot.reply(message, '```Basically you will get told to fuck off, no matter what you say```');
 });
 
 controller.hears(['weather'], 'direct_message,direct_mention,mention', function(bot, message) {
