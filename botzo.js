@@ -25,96 +25,96 @@ var bot = controller.spawn({
 }).startRTM();
 
 controller.hears(['help'], 'direct_message,direct_mention,mention', function(bot, message) {
-    bot.reply(message, 'Available commands:');
-    bot.reply(message, '`random` -  Get a random angry message from Botzo');
-    bot.reply(message, '```Basically you will get told to fvck off, no matter what you say```');
+        bot.reply(message, 'Available commands:');
+        bot.reply(message, '`random` -  Get a random angry message from Botzo');
+        bot.reply(message, '`weather` -  Get London\'s current weather');
+        bot.reply(message, '```Basically you will get told to fvck off, no matter what you say```');
 });
 
-// controller.hears(['random'], 'direct_message,direct_mention,mention',function(bot, message) {
-//     bot.reply(message, functions.random());
+controller.hears(['weather'], 'direct_message,direct_mention,mention', function(bot, message) {
+        bot.startConversation(message,function(err,convo) {
+
+            convo.ask('For what city you loser?',function(response,convo) {
+                // convo.say('Cool, you said: ' + response.text);
+                w = functions.get_weather(bot, message, response.text);
+                convo.next();
+            });
+        });
+
+        // console.log('weather', w);
+        // bot.reply(message, w['temperature']);
+});
+
+controller.hears(['(.*)'],'direct_message,direct_mention,mention',function(bot, message) {
+        bot_response = functions.random_message();
+        bot_message = bot_response['message'];
+        bot_icon = bot_response['icon'];
+
+        bot.api.reactions.add({
+            timestamp: message.ts,
+            channel: message.channel,
+            name: bot_icon,
+        },function(err, res) {
+            if (err) {
+                bot.botkit.log('Failed to add emoji reaction :(',err);
+                bot.botkit.log(bot_icon);
+            }
+        });
+
+
+        controller.storage.users.get(message.user,function(err, user) {
+            bot.reply(message, bot_message);
+    });
+});
+
+// controller.hears(['shutdown'],'direct_message,direct_mention,mention',function(bot, message) {
+
+//     bot.startConversation(message,function(err, convo) {
+//         convo.ask('Are you sure you want me to shutdown?',[
+//             {
+//                 pattern: bot.utterances.yes,
+//                 callback: function(response, convo) {
+//                     convo.say('Bye!');
+//                     convo.next();
+//                     setTimeout(function() {
+//                         process.exit();
+//                     },3000);
+//                 }
+//             },
+//         {
+//             pattern: bot.utterances.no,
+//             default: true,
+//             callback: function(response, convo) {
+//                 convo.say('*Phew!*');
+//                 convo.next();
+//             }
+//         }
+//         ]);
+//     });
 // });
 
-// (.*)
-// controller.hears(['hello','hi'],'direct_message,direct_mention,mention',function(bot, message) {
-controller.hears(['(.*)'],'direct_message,direct_mention,mention',function(bot, message) {
+// controller.hears(['uptime','identify yourself','who are you','what is your name'],'direct_message,direct_mention,mention',function(bot, message) {
 
-    bot_response = functions.random();
-    bot_message = bot_response['message'];
-    bot_icon = bot_response['icon'];
+//     var hostname = os.hostname();
+//     var uptime = formatUptime(process.uptime());
 
-    bot.api.reactions.add({
-        timestamp: message.ts,
-        channel: message.channel,
-        // name: 'robot_face',
-        name: bot_icon,
-    },function(err, res) {
-        if (err) {
-            bot.botkit.log('Failed to add emoji reaction :(',err);
-            bot.botkit.log(bot_icon);
-        }
-    });
+//     bot.reply(message,':robot_face: I am a bot named <@' + bot.identity.name + '>. I have been running for ' + uptime + ' on ' + hostname + '.');
+// });
 
+// function formatUptime(uptime) {
+//     var unit = 'second';
+//     if (uptime > 60) {
+//         uptime = uptime / 60;
+//         unit = 'minute';
+//     }
+//     if (uptime > 60) {
+//         uptime = uptime / 60;
+//         unit = 'hour';
+//     }
+//     if (uptime != 1) {
+//         unit = unit + 's';
+//     }
 
-    controller.storage.users.get(message.user,function(err, user) {
-        // if (user && user.name) {
-        //     bot.reply(message,'Hello ' + user.name + '!!');
-        // } else {
-        //     bot.reply(message,'Hello.');
-        // }
-        bot.reply(message, bot_message);
-    });
-});
-
-controller.hears(['shutdown'],'direct_message,direct_mention,mention',function(bot, message) {
-
-    bot.startConversation(message,function(err, convo) {
-        convo.ask('Are you sure you want me to shutdown?',[
-            {
-                pattern: bot.utterances.yes,
-                callback: function(response, convo) {
-                    convo.say('Bye!');
-                    convo.next();
-                    setTimeout(function() {
-                        process.exit();
-                    },3000);
-                }
-            },
-        {
-            pattern: bot.utterances.no,
-            default: true,
-            callback: function(response, convo) {
-                convo.say('*Phew!*');
-                convo.next();
-            }
-        }
-        ]);
-    });
-});
-
-
-controller.hears(['uptime','identify yourself','who are you','what is your name'],'direct_message,direct_mention,mention',function(bot, message) {
-
-    var hostname = os.hostname();
-    var uptime = formatUptime(process.uptime());
-
-    bot.reply(message,':robot_face: I am a bot named <@' + bot.identity.name + '>. I have been running for ' + uptime + ' on ' + hostname + '.');
-
-});
-
-function formatUptime(uptime) {
-    var unit = 'second';
-    if (uptime > 60) {
-        uptime = uptime / 60;
-        unit = 'minute';
-    }
-    if (uptime > 60) {
-        uptime = uptime / 60;
-        unit = 'hour';
-    }
-    if (uptime != 1) {
-        unit = unit + 's';
-    }
-
-    uptime = uptime + ' ' + unit;
-    return uptime;
-}
+//     uptime = uptime + ' ' + unit;
+//     return uptime;
+// }
