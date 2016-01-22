@@ -1,10 +1,10 @@
 {
   "name": "botzo",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Gets angry about almost anything. Tbh, everything.",
   "main": "botzo.js",
   "dependencies": {
-    "botkit": "0.0.5",
+    "botkit": "0.0.6",
     "weather-js": "^1.0.2"
   },
   "devDependencies": {},
