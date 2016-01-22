@@ -12,7 +12,7 @@ Botzo gets angry about almost anything. Tbh, everything.
 #############################################################################*/
 
 var Botkit = require('botkit');
-var angry_messages = require('./angry_messages');
+var angryMessages = require('./angryMessages.json');
 var functions = require('./functions');
 var os = require('os');
 
