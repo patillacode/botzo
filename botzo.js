@@ -45,9 +45,9 @@ controller.hears(['tits', 'boobs'], 'direct_message,direct_mention,mention', fun
 });
 
 controller.hears(['(.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
-    bot_response = functions.random_message();
-    bot_message = bot_response.message;
-    bot_icon = bot_response.icon;
+    var bot_response = functions.random_message();
+    var bot_message = bot_response.message;
+    var bot_icon = bot_response.icon;
 
     bot.api.reactions.add({
         timestamp: message.ts,
