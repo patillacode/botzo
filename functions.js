@@ -11,7 +11,9 @@ function random_message() {
 
 function print_weather(result, bot, message, weather_messages) {
     for (var i = 0, len = weather_messages.length; i < len; i++) {
-        bot.reply(message, weather_messages[i]);
+        weather_messages.forEach(weather_message => {
+            bot.reply(message, weather_message);
+        });
     }
 }
 
