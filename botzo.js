@@ -33,7 +33,6 @@ controller.hears(['help'], 'direct_message,direct_mention,mention', function(bot
 
 controller.hears(['weather'], 'direct_message,direct_mention,mention', function(bot, message) {
         bot.startConversation(message,function(err,convo) {
-
             convo.ask('For what city you loser?',function(response,convo) {
                 w = functions.get_weather(bot, message, response.text);
                 convo.next();
@@ -41,25 +40,28 @@ controller.hears(['weather'], 'direct_message,direct_mention,mention', function(
         });
 });
 
+controller.hears(['tits', 'boobs'], 'direct_message,direct_mention,mention', function(bot, message) {
+        bot.reply(message, '（。 ㅅ  。）');
+});
+
 controller.hears(['(.*)'],'direct_message,direct_mention,mention',function(bot, message) {
-        bot_response = functions.random_message();
-        bot_message = bot_response['message'];
-        bot_icon = bot_response['icon'];
+    bot_response = functions.random_message();
+    bot_message = bot_response['message'];
+    bot_icon = bot_response['icon'];
 
-        bot.api.reactions.add({
-            timestamp: message.ts,
-            channel: message.channel,
-            name: bot_icon,
-        },function(err, res) {
-            if (err) {
-                bot.botkit.log('Failed to add emoji reaction :(',err);
-                bot.botkit.log(bot_icon);
-            }
-        });
+    bot.api.reactions.add({
+        timestamp: message.ts,
+        channel: message.channel,
+        name: bot_icon,
+    },function(err, res) {
+        if (err) {
+            bot.botkit.log('Failed to add emoji reaction :(',err);
+            bot.botkit.log(bot_icon);
+        }
+    });
 
-
-        controller.storage.users.get(message.user,function(err, user) {
-            bot.reply(message, bot_message);
+    controller.storage.users.get(message.user,function(err, user) {
+        bot.reply(message, bot_message);
     });
 });
 
