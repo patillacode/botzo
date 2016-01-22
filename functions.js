@@ -10,11 +10,9 @@ function random_message() {
 }
 
 function print_weather(result, bot, message, weather_messages) {
-    for (var i = 0, len = weather_messages.length; i < len; i++) {
-        weather_messages.forEach(weather_message => {
-            bot.reply(message, weather_message);
-        });
-    }
+    weather_messages.forEach(weather_message => {
+        bot.reply(message, weather_message);
+    });
 }
 
 function print_weather_error(err, bot, message, weather_messages) {
