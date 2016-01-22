@@ -5,7 +5,7 @@
   "main": "botzo.js",
   "dependencies": {
     "botkit": "0.0.5",
-    "weather-js": "1.0.2",
+    "weather-js": "^1.0.2"
   },
   "devDependencies": {},
   "scripts": {
