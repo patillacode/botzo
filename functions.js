@@ -1,5 +1,4 @@
-var angry_messages = require('./angry_messages');
-angry_messages = angry_messages.angry_messages
+var angryMessages = require('./angryMessages.json');
 
 var weather = require('weather-js');
 var weather_data;
