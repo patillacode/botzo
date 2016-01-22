@@ -1,10 +1,5 @@
 var angryMessages = require('./angryMessages.json');
-
 var weather = require('weather-js');
-var weather_data;
-
-exports.random_message = random_message;
-exports.get_weather = get_weather;
 
 function random_message() {
     random_pos = Math.floor(Math.random() * angry_messages.length);
@@ -55,3 +50,6 @@ function get_weather(bot, message, location) {
         }
     });
 }
+
+exports.random_message = random_message;
+exports.get_weather = get_weather;
