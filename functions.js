@@ -13,14 +13,15 @@ function random_message() {
             'icon': angry_messages[random_pos]['icon']}
 }
 
-
 function print_weather(result, bot, message, weather_messages){
-    // foreach(function(i){
-    //     bot.reply(message, weather_messages[i]);
-    // });
     for (var i = 0, len = weather_messages.length; i < len; i++) {
         bot.reply(message, weather_messages[i]);
     }
+}
+
+function print_weather_error(err, bot, message, weather_messages){
+        bot.reply(message, err);
+        bot.reply(message, "The fvckin' weather command is NOT working, leave me alone.");
 }
 
 function get_weather(bot, message, location){
@@ -29,14 +30,12 @@ function get_weather(bot, message, location){
             print_weather_error(err, bot, message, location);
         }
         else{
-            // console.log(result[0]['current']);
             current = result[0]['current'];
             temperature = current['temperature'];
             skytext = current['skytext'];
             feelslike = current['feelslike'];
             humidity = current['humidity'];
 
-            // console.log(JSON.stringify(result, null, 2));
             weather_data = {"temperature": temperature,
                             "skytext": skytext,
                             "feelslike": feelslike,
@@ -47,7 +46,6 @@ function get_weather(bot, message, location){
                 weather_messages.push("But it feels like "+weather_data['feelslike']+"º god dammit!");
             }
             weather_messages.push(weather_data['skytext']+" / "+weather_data['humidity']+"% humidity");
-            // weather_messages.push("Just look out the window you twat.");
             print_weather(result, bot, message, weather_messages);
         }
     });

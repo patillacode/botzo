@@ -35,14 +35,10 @@ controller.hears(['weather'], 'direct_message,direct_mention,mention', function(
         bot.startConversation(message,function(err,convo) {
 
             convo.ask('For what city you loser?',function(response,convo) {
-                // convo.say('Cool, you said: ' + response.text);
                 w = functions.get_weather(bot, message, response.text);
                 convo.next();
             });
         });
-
-        // console.log('weather', w);
-        // bot.reply(message, w['temperature']);
 });
 
 controller.hears(['(.*)'],'direct_message,direct_mention,mention',function(bot, message) {
