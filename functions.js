@@ -10,7 +10,7 @@ function random_message() {
 }
 
 function printWeather(result, bot, message, weatherMessages) {
-    weatherMessages.forEach(weatherMessage => {
+    weatherMessages.forEach(weatherMessage, function(message) {
         bot.reply(message, weatherMessage);
     });
 }

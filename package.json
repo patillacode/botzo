@@ -4,8 +4,8 @@
   "description": "Gets angry about almost anything. Tbh, everything.",
   "main": "botzo.js",
   "dependencies": {
-    "botkit": "0.0.6",
-    "weather-js": "^1.0.2"
+    "botkit": "*",
+    "weather-js": "*"
   },
   "devDependencies": {},
   "scripts": {
