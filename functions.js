@@ -10,9 +10,12 @@ function random_message() {
 }
 
 function printWeather(result, bot, message, weatherMessages) {
-    weatherMessages.forEach(weatherMessage, function(message) {
-        bot.reply(message, weatherMessage);
-    });
+    // weatherMessages.forEach(weatherMessage, function(message) {
+    //     bot.reply(message, weatherMessage);
+    // });
+    for (var i = 0, len = weatherMessages.length; i < len; i++) {
+        bot.reply(message, weatherMessages[i]);
+    }
 }
 
 function printWeatherError(err, bot, message, weatherMessages) {
@@ -28,6 +31,7 @@ function getWeather(bot, message, location) {
         if (err) {
             printWeatherError(err, bot, message, location);
         } else {
+            var current = result[0]['current'];
             var weatherData = {
                 'temperature': current['temperature'],
                 'skytext': current['skytext'],

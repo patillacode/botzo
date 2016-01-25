@@ -34,7 +34,7 @@ controller.hears(['help'], 'direct_message,direct_mention,mention', function(bot
 controller.hears(['weather'], 'direct_message,direct_mention,mention', function(bot, message) {
     bot.startConversation(message, function(err, convo) {
         convo.ask('For what city you loser?', function(response, convo) {
-            w = functions.get_weather(bot, message, response.text);
+            w = functions.getWeather(bot, message, response.text);
             convo.next();
         });
     });
